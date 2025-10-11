@@ -124,10 +124,6 @@ class ArxanKiller {
     static SmallPatches() {
         ArxanPatcher.PatchString(0xC3411B, "i-love-useless-patches") // String: /sbin/.magisk
         ArxanPatcher.PatchString(0xFE9B67, "did-you-know-all-theses-patches-are-useless") // String: /sbin/magisk
-        ArxanPatcher.PatchString(0xFE9B67, "did-you-know-all-theses-patches-are-useless") // String: /sbin/magisk
-        ArxanPatcher.PatchString(0xFE9B67, "did-you-know-all-theses-patches-are-useless") // String: /sbin/magisk
-        ArxanPatcher.PatchString(0xFE9B67, "did-you-know-all-theses-patches-are-useless") // String: /sbin/magisk
-        ArxanPatcher.PatchString(0xFE9B67, "did-you-know-all-theses-patches-are-useless") // String: /sbin/magisk
     }
 }
 
