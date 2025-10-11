@@ -1,8 +1,8 @@
 # Arxan-Killer-v36
-A simple Frida Script to bypass Arxan protections in Brawl Stars v36.
+A simple Frida Script to Bypass Arxan Protections in Brawl Stars v36.
 
 ## Warning
-- This has not been tested, so I don't know if it actually works. lol.
+- This has not been tested, so I dont know if it actually works, but it should work. lol.
 
 ## Note
 - Im not providing help to update offsets for other versions; you must do that yourself.
