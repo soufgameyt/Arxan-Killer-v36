@@ -44,6 +44,13 @@ class Addresses {
             static Clean = GameLibrary.add(0x68B1F8);
         }
     }
+
+    static Messaging = class {
+        static Connect = class {
+            static Jump = GameLibrary.add(0x39AD0C);
+            static Clean = GameLibrary.add(0x39C55C);
+        }
+    }
 }
 
 class ArxanPatcher {
@@ -64,6 +71,10 @@ class ArxanPatcher {
             return value
         }, 'int', []))
     }
+
+    static PatchString(address, string) {
+        Memory.writeUtf8String(GameLibrary.add(address), string);
+    }
 }
 
 class ArxanKiller {
@@ -72,6 +83,7 @@ class ArxanKiller {
         ArxanKiller.PatchChecks();
         ArxanKiller.PatchImports();
         ArxanKiller.PatchGuards();
+        ArxanKiller.SmallPatches();
     }
 
     static PatchChecks() {
@@ -92,6 +104,7 @@ class ArxanKiller {
     static PatchJumps() {
         ArxanPatcher.PatchJump(Addresses.GameMain.CreateGameInstance, Addresses.GameMain.GetInstance); // Replaces the g_createGameInstance function with the GameMain::getInstance function because it creates an instance of GameMain if the instance is not created yet
         ArxanPatcher.PatchJump(Addresses.LoginMessage.Jump, Addresses.LoginMessage.Clean);
+        ArxanPatcher.PatchJump(Addresses.Messaging.Connect.Jump, Addresses.Messaging.Connect.Clean);
         ArxanPatcher.PatchJump(Addresses.InputSystem.Update.Jump, Addresses.InputSystem.Update.Clean);
         ArxanPatcher.PatchJump(Addresses.CombatHUD.UltiButtonActivated.Jump, Addresses.CombatHUD.UltiButtonActivated.Clean);
         ArxanPatcher.PatchJump(Addresses.RessourceManager.Init.Jump, Addresses.RessourceManager.Init.Clean);
@@ -99,12 +112,22 @@ class ArxanKiller {
 
     static PatchImports() {
         ArxanPatcher.PatchImport("openat", -1, "");
+        ArxanPatcher.PatchImport("qmemcpy", -1, "");
     }
     
     static PatchGuards() {
         RootDetection.KillRootDetection();
         FridaProtection.KillFridaProtection();
         MemoryGuard.KillMemoryGuard();
+    }
+
+    static SmallPatches() {
+        ArxanPatcher.PatchString(0xC3411B, "i-love-useless-patches") // String: /sbin/.magisk
+        ArxanPatcher.PatchString(0xFE9B67, "did-you-know-all-theses-patches-are-useless") // String: /sbin/magisk
+        ArxanPatcher.PatchString(0xFE9B67, "did-you-know-all-theses-patches-are-useless") // String: /sbin/magisk
+        ArxanPatcher.PatchString(0xFE9B67, "did-you-know-all-theses-patches-are-useless") // String: /sbin/magisk
+        ArxanPatcher.PatchString(0xFE9B67, "did-you-know-all-theses-patches-are-useless") // String: /sbin/magisk
+        ArxanPatcher.PatchString(0xFE9B67, "did-you-know-all-theses-patches-are-useless") // String: /sbin/magisk
     }
 }
 
@@ -162,6 +185,7 @@ class FridaProtection {
         ArxanPatcher.PatchFunction(0x12EC20, 0, ""); // lv1_detect_frida_server__ZL26frida_library_guard_threadPv
         ArxanPatcher.PatchFunction(0x348890, 0, ""); // lv1_detect_frida_server__ZL27create_library_guard_threadv
         ArxanPatcher.PatchFunction(0x51BE60, 0, ""); // lv1_detect_frida_server__ZL8snprintfPcU17pass_object_size1jPKcz
+        ArxanPatcher.PatchFunction(0x914C70, 0, ""); // frida_detected
     }
 }
 
