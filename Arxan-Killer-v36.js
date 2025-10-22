@@ -186,7 +186,7 @@ class FridaProtection {
 }
 
 class ArxanKillerInit {
-    v36 = class {
+    static v36 = class {
         static Init() {
             GameLibrary.Init();
             ArxanKiller.Init();
