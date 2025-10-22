@@ -185,7 +185,7 @@ class FridaProtection {
     }
 }
 
-class ArxanKiller {
+class ArxanKillerInit {
     v36 = class {
         static Init() {
             GameLibrary.Init();
@@ -194,4 +194,4 @@ class ArxanKiller {
     }
 }
 
-rpc.exports.init = ArxanKiller.v36.Init();
+rpc.exports.init = ArxanKillerInit.v36.Init();
